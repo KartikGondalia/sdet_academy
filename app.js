@@ -752,90 +752,514 @@ const courseContent = {
             <h3>Java Fundamentals for SDET</h3>
             <p>Master the essentials of Java programming for test automation.</p>
             
-            <h4>Lesson 1: Java Basics</h4>
-            <ul>
-                <li>Data types (int, String, boolean, etc.)</li>
-                <li>Variables and operators</li>
-                <li>Control flow (if-else, switch, loops)</li>
-                <li>Arrays and basic data structures</li>
-            </ul>
-            
-            <h4>Lesson 2: Methods and Functions</h4>
-            <ul>
-                <li>Method declaration and invocation</li>
-                <li>Return types and parameters</li>
-                <li>Method overloading</li>
-                <li>Static vs instance methods</li>
-            </ul>
-            
-            <h4>Lesson 3: Strings and Collections</h4>
-            <ul>
-                <li>String manipulation</li>
-                <li>ArrayList, HashMap, HashSet</li>
-                <li>Iterating over collections</li>
-                <li>Sorting and searching</li>
-            </ul>
-            
-            <h4>Lesson 4: Exception Handling</h4>
-            <ul>
-                <li>Try-catch blocks</li>
-                <li>Different exception types</li>
-                <li>Custom exceptions</li>
-                <li>Finally block</li>
-            </ul>
-            
-            <h4>Lesson 5: File Handling</h4>
-            <ul>
-                <li>Reading and writing files</li>
-                <li>File operations</li>
-                <li>BufferedReader and BufferedWriter</li>
-            </ul>
+            <h4>Lesson 1: Data Types & Variables</h4>
+            <p><strong>Understanding Java's Type System</strong></p>
+            <p>Java is a statically-typed language, meaning you must declare variable types before use. This is crucial for automation testing as it prevents runtime errors.</p>
+            <pre><code>// Primitive Data Types
+int age = 25;                    // 32-bit integer
+double salary = 50000.50;        // 64-bit decimal
+boolean isAutomated = true;      // true/false
+char grade = 'A';                // Single character
+long fileSize = 1024000L;        // 64-bit integer
+
+// String - Most important for test automation
+String username = "testuser";
+String password = "SecurePass123";
+
+// Real-world SDET example: Storing test data
+String testEmail = "sdet@company.com";
+int expectedTimeout = 10;
+double expectedPrice = 99.99;</code></pre>
+            <p><strong>Why This Matters in SDET:</strong> When automating tests, you'll handle various data types from web forms, API responses, and databases. For example, handling monetary values requires doubles, user IDs require integers, and form inputs require strings.</p>
+
+            <h4>Lesson 2: Operators & Control Flow</h4>
+            <p><strong>Arithmetic, Logical, and Comparison Operators</strong></p>
+            <pre><code>// Comparison Operators - Essential for test assertions
+int actualPrice = 100;
+int expectedPrice = 100;
+
+if (actualPrice == expectedPrice) {
+    System.out.println("✓ Price matches!");
+}
+
+// Logical Operators
+boolean isUserLoggedIn = true;
+boolean isPaymentProcessed = true;
+
+if (isUserLoggedIn && isPaymentProcessed) {
+    System.out.println("User can proceed to checkout");
+}</code></pre>
+            <p><strong>Control Flow Structures</strong></p>
+            <pre><code>// IF-ELSE in test validation
+String userRole = "admin";
+
+if (userRole.equals("admin")) {
+    System.out.println("Admin dashboard visible");
+} else if (userRole.equals("user")) {
+    System.out.println("User dashboard visible");
+} else {
+    System.out.println("Invalid role");
+}
+
+// FOR LOOP in test execution
+for (int i = 0; i < 5; i++) {
+    System.out.println("Test iteration: " + i);
+}
+
+// WHILE LOOP - Waiting for condition
+int retryCount = 0;
+while (retryCount < 3 && !elementFound) {
+    try {
+        element = driver.findElement(By.id("myElement"));
+        elementFound = true;
+    } catch (NoSuchElementException e) {
+        retryCount++;
+    }
+}</code></pre>
+            <p><strong>Real-world Example: Retry Logic in Tests</strong></p>
+            <pre><code>public class RetryLogic {
+    public static void main(String[] args) {
+        int maxRetries = 3;
+        int retryCount = 0;
+        boolean success = false;
+        
+        while (retryCount < maxRetries && !success) {
+            try {
+                // Attempt to login
+                login("user@test.com", "password");
+                success = true;
+                System.out.println("Login successful");
+            } catch (LoginFailedException e) {
+                retryCount++;
+                System.out.println("Retry attempt: " + retryCount);
+                if (retryCount >= maxRetries) {
+                    System.out.println("Max retries reached");
+                }
+            }
+        }
+    }
+}</code></pre>
+
+            <h4>Lesson 3: Methods - Reusable Test Functions</h4>
+            <p><strong>Why Methods Matter in SDET</strong></p>
+            <p>Methods are the backbone of maintainable test automation. They encapsulate repetitive tasks into reusable components.</p>
+            <pre><code>// Basic Method Structure
+public static void printWelcomeMessage(String username) {
+    System.out.println("Welcome, " + username);
+}
+
+// Method with Return Type
+public static int calculateTestDuration(int startTime, int endTime) {
+    return endTime - startTime;
+}
+
+// Real-world SDET methods
+public static boolean isElementVisible(WebDriver driver, By locator) {
+    try {
+        WebElement element = driver.findElement(locator);
+        return element.isDisplayed();
+    } catch (NoSuchElementException e) {
+        return false;
+    }
+}
+
+public static void fillLoginForm(String username, String password) {
+    driver.findElement(By.id("username")).sendKeys(username);
+    driver.findElement(By.id("password")).sendKeys(password);
+    driver.findElement(By.id("loginBtn")).click();
+}
+
+// Method Overloading - Multiple methods with same name but different parameters
+public static void login(String username, String password) {
+    // 2-parameter version
+}
+
+public static void login(String email) {
+    // Single parameter version for SSO login
+}</code></pre>
+
+            <h4>Lesson 4: Arrays & Collections</h4>
+            <p><strong>Working with Multiple Data Elements</strong></p>
+            <pre><code>// Arrays - Fixed size
+String[] browsers = {"Chrome", "Firefox", "Safari", "Edge"};
+int[] testIds = {101, 102, 103, 104, 105};
+
+// ArrayList - Dynamic size (More useful in testing)
+List<String> testData = new ArrayList<>();
+testData.add("test1@example.com");
+testData.add("test2@example.com");
+testData.add("test3@example.com");
+
+// HashMap - Key-value pairs (Perfect for test data)
+Map<String, String> loginCredentials = new HashMap<>();
+loginCredentials.put("username1", "password1");
+loginCredentials.put("username2", "password2");
+loginCredentials.put("username3", "password3");
+
+// Iterating through collections
+for (String username : loginCredentials.keySet()) {
+    String password = loginCredentials.get(username);
+    System.out.println("Testing with: " + username);
+    // Perform login test
+}
+
+// Real-world example: Testing multiple products
+List<Product> products = new ArrayList<>();
+products.add(new Product("Laptop", 1000));
+products.add(new Product("Phone", 500));
+products.add(new Product("Tablet", 300));
+
+// Verify prices for all products
+for (Product product : products) {
+    System.out.println("Verifying: " + product.name + " - $" + product.price);
+}</code></pre>
+
+            <h4>Lesson 5: Exception Handling in Testing</h4>
+            <p><strong>Graceful Error Handling</strong></p>
+            <pre><code>// Try-Catch Block
+try {
+    WebElement element = driver.findElement(By.id("nonExistentElement"));
+    element.click();
+} catch (NoSuchElementException e) {
+    System.out.println("Element not found: " + e.getMessage());
+    // Log the error and continue
+}
+
+// Multiple Catch Blocks
+try {
+    driver.get("https://example.com");
+    driver.findElement(By.id("login")).click();
+} catch (NoSuchElementException e) {
+    System.out.println("Login button not found");
+} catch (TimeoutException e) {
+    System.out.println("Page load timeout");
+} catch (Exception e) {
+    System.out.println("Unexpected error: " + e.getMessage());
+} finally {
+    // This always executes - useful for cleanup
+    driver.quit();
+}
+
+// Custom Exception for Tests
+public class TestFailedException extends Exception {
+    public TestFailedException(String message) {
+        super(message);
+    }
+}
+
+// Using custom exception
+public static void verifyUserLoggedIn(boolean isLoggedIn) throws TestFailedException {
+    if (!isLoggedIn) {
+        throw new TestFailedException("User is not logged in!");
+    }
+}</code></pre>
+
+            <h4>Lesson 6: Working with Strings</h4>
+            <p><strong>String Manipulation in Test Automation</strong></p>
+            <pre><code>String testData = "Shivani Mishra - Future SDET";
+
+// Common String methods
+System.out.println(testData.length());           // 28
+System.out.println(testData.toUpperCase());      // SHIVANI MISHRA - FUTURE SDET
+System.out.println(testData.toLowerCase());      // shivani mishra - future sdet
+System.out.println(testData.substring(0, 7));    // Shivani
+System.out.println(testData.contains("SDET"));   // false
+System.out.println(testData.contains("SDET"));   // true
+System.out.println(testData.replace("Mishra", "Sharma")); // Shivani Sharma - Future SDET
+
+// Real-world SDET use case
+String errorMessage = driver.findElement(By.className("error")).getText();
+if (errorMessage.contains("Invalid")) {
+    System.out.println("Validation error detected");
+}
+
+// String concatenation
+String firstName = "Shivani";
+String lastName = "Mishra";
+String fullName = firstName + " " + lastName; // "Shivani Mishra"
+
+// Using StringBuilder for performance
+StringBuilder sb = new StringBuilder();
+sb.append("Hello ");
+sb.append("World ");
+sb.append("SDET");
+String message = sb.toString(); // "Hello World SDET"</code></pre>
         `
     },
     2: {
         title: "OOP Concepts",
         content: `
-            <h3>Object-Oriented Programming Concepts</h3>
-            <p>Understand the four pillars of OOP essential for test automation.</p>
+            <h3>Object-Oriented Programming - 4 Pillars</h3>
+            <p>Essential OOP concepts that make test automation scalable and maintainable.</p>
             
-            <h4>Lesson 1: Classes and Objects</h4>
-            <ul>
-                <li>Creating and instantiating classes</li>
-                <li>Constructors and destructors</li>
-                <li>Instance and class variables</li>
-                <li>this keyword</li>
-            </ul>
-            
-            <h4>Lesson 2: Encapsulation</h4>
-            <ul>
-                <li>Access modifiers (public, private, protected)</li>
-                <li>Getters and setters</li>
-                <li>Data hiding</li>
-                <li>Information hiding principles</li>
-            </ul>
-            
-            <h4>Lesson 3: Inheritance</h4>
-            <ul>
-                <li>Parent and child classes</li>
-                <li>super keyword</li>
-                <li>Method overriding</li>
-                <li>Types of inheritance</li>
-            </ul>
-            
-            <h4>Lesson 4: Polymorphism</h4>
-            <ul>
-                <li>Method overloading</li>
-                <li>Method overriding</li>
-                <li>Interface implementation</li>
-                <li>Abstract classes</li>
-            </ul>
-            
-            <h4>Lesson 5: Abstraction</h4>
-            <ul>
-                <li>Abstract classes and methods</li>
-                <li>Interfaces</li>
-                <li>Implementation patterns</li>
-            </ul>
+            <h4>Lesson 1: Classes and Objects (Blueprints)</h4>
+            <p><strong>Understanding Objects as Real-World Entities</strong></p>
+            <pre><code>// Example: Modeling a User for test automation
+public class User {
+    // Attributes (state)
+    private String username;
+    private String email;
+    private String password;
+    private boolean isActive;
+    
+    // Constructor - Initializes the object
+    public User(String username, String email, String password) {
+        this.username = username;
+        this.email = email;
+        this.password = password;
+        this.isActive = true;
+    }
+    
+    // Methods (behavior)
+    public void login() {
+        System.out.println(username + " logged in successfully");
+    }
+    
+    public void logout() {
+        System.out.println(username + " logged out");
+    }
+}
+
+// Creating objects from the class blueprint
+User testUser = new User("shivani_mishra", "shivani@test.com", "Pass@123");
+testUser.login();     // Output: shivani_mishra logged in successfully
+testUser.logout();    // Output: shivani_mishra logged out
+
+// Real-world SDET example: Testing multiple users
+User[] testUsers = {
+    new User("user1", "user1@test.com", "pass1"),
+    new User("user2", "user2@test.com", "pass2"),
+    new User("user3", "user3@test.com", "pass3")
+};
+
+for (User user : testUsers) {
+    user.login();
+    // Perform test actions
+    user.logout();
+}</code></pre>
+
+            <h4>Lesson 2: Encapsulation (Data Hiding)</h4>
+            <p><strong>Protecting Internal Data</strong></p>
+            <pre><code>public class Product {
+    // Private - Cannot be accessed outside this class
+    private String productName;
+    private double price;
+    private int quantity;
+    
+    // Constructor
+    public Product(String productName, double price, int quantity) {
+        this.productName = productName;
+        this.setPrice(price);  // Use setter for validation
+        this.quantity = quantity;
+    }
+    
+    // Getters - Allow controlled read access
+    public String getProductName() {
+        return productName;
+    }
+    
+    public double getPrice() {
+        return price;
+    }
+    
+    public int getQuantity() {
+        return quantity;
+    }
+    
+    // Setters - Allow controlled write access with validation
+    public void setPrice(double price) {
+        if (price > 0) {
+            this.price = price;
+        } else {
+            System.out.println("Price cannot be negative!");
+        }
+    }
+    
+    public void updateQuantity(int newQuantity) {
+        if (newQuantity >= 0) {
+            this.quantity = newQuantity;
+        } else {
+            System.out.println("Quantity cannot be negative!");
+        }
+    }
+}
+
+// Using encapsulated class
+Product laptop = new Product("Gaming Laptop", 1200.00, 5);
+System.out.println("Price: " + laptop.getPrice());  // Getter
+laptop.setPrice(1100.00);  // Setter with validation
+laptop.setPrice(-500);  // Will print: "Price cannot be negative!"</code></pre>
+
+            <h4>Lesson 3: Inheritance (Code Reuse)</h4>
+            <p><strong>Sharing Functionality Between Classes</strong></p>
+            <pre><code>// Parent class - Common functionality
+public class Browser {
+    protected WebDriver driver;
+    protected String browserName;
+    
+    public Browser(String browserName) {
+        this.browserName = browserName;
+    }
+    
+    public void openBrowser() {
+        System.out.println("Opening " + browserName + " browser");
+    }
+    
+    public void closeBrowser() {
+        System.out.println("Closing " + browserName + " browser");
+    }
+    
+    public void navigateToURL(String url) {
+        driver.get(url);
+        System.out.println("Navigated to: " + url);
+    }
+}
+
+// Child class - Inherits from Browser
+public class ChromeBrowser extends Browser {
+    public ChromeBrowser() {
+        super("Chrome");
+    }
+    
+    @Override
+    public void openBrowser() {
+        System.setProperty("webdriver.chrome.driver", "path/to/chromedriver");
+        driver = new ChromeDriver();
+        System.out.println("Chrome browser opened");
+    }
+}
+
+// Another child class
+public class FirefoxBrowser extends Browser {
+    public FirefoxBrowser() {
+        super("Firefox");
+    }
+    
+    @Override
+    public void openBrowser() {
+        System.setProperty("webdriver.gecko.driver", "path/to/geckodriver");
+        driver = new FirefoxDriver();
+        System.out.println("Firefox browser opened");
+    }
+}
+
+// Usage: Same code works for multiple browsers
+Browser browser1 = new ChromeBrowser();
+Browser browser2 = new FirefoxBrowser();
+
+browser1.openBrowser();
+browser1.navigateToURL("https://example.com");  // Inherited method
+browser1.closeBrowser();
+
+browser2.openBrowser();
+browser2.navigateToURL("https://example.com");
+browser2.closeBrowser();</code></pre>
+
+            <h4>Lesson 4: Polymorphism (Many Forms)</h4>
+            <p><strong>One Interface, Multiple Implementations</strong></p>
+            <pre><code>// Interface - Contract for behavior
+public interface Browser {
+    void openBrowser();
+    void closeBrowser();
+}
+
+// Implementation 1
+public class ChromeBrowser implements Browser {
+    @Override
+    public void openBrowser() {
+        System.out.println("Opening Chrome");
+    }
+    
+    @Override
+    public void closeBrowser() {
+        System.out.println("Closing Chrome");
+    }
+}
+
+// Implementation 2
+public class FirefoxBrowser implements Browser {
+    @Override
+    public void openBrowser() {
+        System.out.println("Opening Firefox");
+    }
+    
+    @Override
+    public void closeBrowser() {
+        System.out.println("Closing Firefox");
+    }
+}
+
+// Polymorphic behavior
+public class TestRunner {
+    public static void runTest(Browser browser) {
+        browser.openBrowser();
+        // Perform tests
+        browser.closeBrowser();
+    }
+    
+    public static void main(String[] args) {
+        // Same method, different behavior
+        runTest(new ChromeBrowser());    // Uses Chrome implementation
+        runTest(new FirefoxBrowser());   // Uses Firefox implementation
+    }
+}</code></pre>
+
+            <h4>Lesson 5: Abstraction (Hiding Complexity)</h4>
+            <p><strong>Simplifying Complex Operations</strong></p>
+            <pre><code>// Abstract class - Partial implementation
+public abstract class BasePage {
+    protected WebDriver driver;
+    
+    public BasePage(WebDriver driver) {
+        this.driver = driver;
+    }
+    
+    // Abstract method - Must be implemented by child
+    public abstract void verifyPageLoaded();
+    
+    // Common method - Available to all child classes
+    public void waitForElement(By locator, int seconds) {
+        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(seconds));
+        wait.until(ExpectedConditions.visibilityOfElementLocated(locator));
+    }
+    
+    public void fillText(By locator, String text) {
+        driver.findElement(locator).sendKeys(text);
+    }
+    
+    public void click(By locator) {
+        driver.findElement(locator).click();
+    }
+}
+
+// Concrete implementation
+public class LoginPage extends BasePage {
+    private By usernameField = By.id("username");
+    private By passwordField = By.id("password");
+    private By loginButton = By.xpath("//button[@type='submit']");
+    
+    public LoginPage(WebDriver driver) {
+        super(driver);
+    }
+    
+    @Override
+    public void verifyPageLoaded() {
+        Assert.assertTrue(driver.findElement(usernameField).isDisplayed());
+        System.out.println("Login page loaded");
+    }
+    
+    public void login(String username, String password) {
+        fillText(usernameField, username);  // Uses inherited method
+        fillText(passwordField, password);
+        click(loginButton);
+    }
+}
+
+// Simple usage
+WebDriver driver = new ChromeDriver();
+LoginPage loginPage = new LoginPage(driver);
+loginPage.verifyPageLoaded();
+loginPage.login("shivani@test.com", "SecurePass123");</code></pre>
         `
     },
     3: {
