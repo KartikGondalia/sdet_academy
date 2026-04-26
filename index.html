@@ -1,0 +1,387 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SDET Academy - Zero to Hero in Test Automation</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div id="app">
+        <!-- Navigation Header -->
+        <nav class="navbar">
+            <div class="container">
+                <div class="logo">
+                    <h1>⚙️ SDET Academy</h1>
+                    <p>Zero to Hero in Test Automation</p>
+                </div>
+                <ul class="nav-menu" id="navMenu">
+                    <li><a href="#" data-tab="home" class="nav-link active">Home</a></li>
+                    <li><a href="#" data-tab="roadmap" class="nav-link">Roadmap</a></li>
+                    <li><a href="#" data-tab="course" class="nav-link">Courses</a></li>
+                    <li><a href="#" data-tab="practice" class="nav-link">Practice</a></li>
+                    <li><a href="#" data-tab="interview" class="nav-link">Interview Q&A</a></li>
+                    <li><a href="#" data-tab="tests" class="nav-link">Tests</a></li>
+                </ul>
+            </div>
+        </nav>
+
+        <!-- Main Content -->
+        <main class="main-content">
+            <!-- Home Section -->
+            <section id="home" class="tab-content active">
+                <div class="hero">
+                    <div class="hero-content">
+                        <h2>Master SDET: Software Development Engineer in Test</h2>
+                        <p>Complete learning platform with courses, practice problems, real interview questions, and comprehensive tests</p>
+                        <button class="btn btn-primary" onclick="switchTab('roadmap')">Start Learning</button>
+                        <button class="btn btn-secondary" onclick="switchTab('practice')">Try Practice</button>
+                    </div>
+                    <div class="hero-stats">
+                        <div class="stat-card">
+                            <h3>50+</h3>
+                            <p>Courses</p>
+                        </div>
+                        <div class="stat-card">
+                            <h3>200+</h3>
+                            <p>Questions</p>
+                        </div>
+                        <div class="stat-card">
+                            <h3>100+</h3>
+                            <p>Interview Q&A</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="features-grid">
+                    <div class="feature-card">
+                        <div class="feature-icon">📚</div>
+                        <h3>Comprehensive Courses</h3>
+                        <p>From basics to advanced automation frameworks</p>
+                    </div>
+                    <div class="feature-card">
+                        <div class="feature-icon">💻</div>
+                        <h3>Coding Practice</h3>
+                        <p>MCQs, fill-in-the-blank, and coding challenges</p>
+                    </div>
+                    <div class="feature-card">
+                        <div class="feature-icon">🎯</div>
+                        <h3>Real Interview Questions</h3>
+                        <p>Prepare with actual questions asked in top companies</p>
+                    </div>
+                    <div class="feature-card">
+                        <div class="feature-icon">📊</div>
+                        <h3>Mock Tests</h3>
+                        <p>Test your knowledge with comprehensive exams</p>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Roadmap Section -->
+            <section id="roadmap" class="tab-content">
+                <div class="section-header">
+                    <h2>SDET Learning Roadmap</h2>
+                    <p>Complete path from beginner to expert</p>
+                </div>
+
+                <div class="roadmap">
+                    <div class="roadmap-phase">
+                        <div class="phase-badge">Phase 1</div>
+                        <h3>Foundations (Weeks 1-4)</h3>
+                        <ul>
+                            <li>Java Basics & OOP Concepts</li>
+                            <li>Understanding Testing Basics</li>
+                            <li>QA vs SDET Roles</li>
+                            <li>Version Control (Git)</li>
+                            <li>Maven/Gradle Basics</li>
+                        </ul>
+                        <button class="btn btn-small" onclick="switchTab('course')">Learn Phase 1</button>
+                    </div>
+
+                    <div class="roadmap-phase">
+                        <div class="phase-badge">Phase 2</div>
+                        <h3>Core Automation (Weeks 5-8)</h3>
+                        <ul>
+                            <li>Selenium WebDriver Basics</li>
+                            <li>Locating Elements</li>
+                            <li>Handling Waits</li>
+                            <li>Actions & Advanced Interactions</li>
+                            <li>Handling Alerts & Windows</li>
+                        </ul>
+                        <button class="btn btn-small" onclick="switchTab('course')">Learn Phase 2</button>
+                    </div>
+
+                    <div class="roadmap-phase">
+                        <div class="phase-badge">Phase 3</div>
+                        <h3>Test Frameworks (Weeks 9-12)</h3>
+                        <ul>
+                            <li>TestNG Framework</li>
+                            <li>JUnit Framework</li>
+                            <li>BDD - Cucumber & Gherkin</li>
+                            <li>Page Object Model (POM)</li>
+                            <li>Test Data Management</li>
+                        </ul>
+                        <button class="btn btn-small" onclick="switchTab('course')">Learn Phase 3</button>
+                    </div>
+
+                    <div class="roadmap-phase">
+                        <div class="phase-badge">Phase 4</div>
+                        <h3>Advanced Topics (Weeks 13-16)</h3>
+                        <ul>
+                            <li>API Testing (RestAssured)</li>
+                            <li>Database Testing</li>
+                            <li>Performance Testing</li>
+                            <li>CI/CD Integration</li>
+                            <li>Docker & Containerization</li>
+                        </ul>
+                        <button class="btn btn-small" onclick="switchTab('course')">Learn Phase 4</button>
+                    </div>
+
+                    <div class="roadmap-phase">
+                        <div class="phase-badge">Phase 5</div>
+                        <h3>Expert Level (Weeks 17-20)</h3>
+                        <ul>
+                            <li>Appium - Mobile Testing</li>
+                            <li>Advanced Reporting</li>
+                            <li>Test Optimization</li>
+                            <li>Custom Frameworks</li>
+                            <li>Real Interview Prep</li>
+                        </ul>
+                        <button class="btn btn-small" onclick="switchTab('course')">Learn Phase 5</button>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Courses Section -->
+            <section id="course" class="tab-content">
+                <div class="section-header">
+                    <h2>Course Content</h2>
+                    <p>Detailed curriculum for each topic</p>
+                </div>
+
+                <div class="courses-container">
+                    <div class="course-card">
+                        <div class="course-level">Beginner</div>
+                        <h3>Java Fundamentals for SDET</h3>
+                        <p>Master Java programming essentials</p>
+                        <div class="course-details">
+                            <span>📚 10 lessons</span>
+                            <span>💻 5 exercises</span>
+                        </div>
+                        <button class="btn btn-small" onclick="showCourseContent(1)">View Content</button>
+                    </div>
+
+                    <div class="course-card">
+                        <div class="course-level">Beginner</div>
+                        <h3>OOP Concepts</h3>
+                        <p>Object-Oriented Programming mastery</p>
+                        <div class="course-details">
+                            <span>📚 8 lessons</span>
+                            <span>💻 4 exercises</span>
+                        </div>
+                        <button class="btn btn-small" onclick="showCourseContent(2)">View Content</button>
+                    </div>
+
+                    <div class="course-card">
+                        <div class="course-level">Intermediate</div>
+                        <h3>Selenium WebDriver Complete</h3>
+                        <p>Advanced WebDriver techniques</p>
+                        <div class="course-details">
+                            <span>📚 15 lessons</span>
+                            <span>💻 10 exercises</span>
+                        </div>
+                        <button class="btn btn-small" onclick="showCourseContent(3)">View Content</button>
+                    </div>
+
+                    <div class="course-card">
+                        <div class="course-level">Intermediate</div>
+                        <h3>TestNG Framework</h3>
+                        <p>Complete TestNG mastery</p>
+                        <div class="course-details">
+                            <span>📚 12 lessons</span>
+                            <span>💻 8 exercises</span>
+                        </div>
+                        <button class="btn btn-small" onclick="showCourseContent(4)">View Content</button>
+                    </div>
+
+                    <div class="course-card">
+                        <div class="course-level">Intermediate</div>
+                        <h3>Page Object Model</h3>
+                        <p>Design patterns for automation</p>
+                        <div class="course-details">
+                            <span>📚 10 lessons</span>
+                            <span>💻 6 exercises</span>
+                        </div>
+                        <button class="btn btn-small" onclick="showCourseContent(5)">View Content</button>
+                    </div>
+
+                    <div class="course-card">
+                        <div class="course-level">Advanced</div>
+                        <h3>REST API Testing</h3>
+                        <p>RestAssured and API automation</p>
+                        <div class="course-details">
+                            <span>📚 14 lessons</span>
+                            <span>💻 9 exercises</span>
+                        </div>
+                        <button class="btn btn-small" onclick="showCourseContent(6)">View Content</button>
+                    </div>
+
+                    <div class="course-card">
+                        <div class="course-level">Advanced</div>
+                        <h3>BDD with Cucumber</h3>
+                        <p>Behavior-Driven Development</p>
+                        <div class="course-details">
+                            <span>📚 11 lessons</span>
+                            <span>💻 7 exercises</span>
+                        </div>
+                        <button class="btn btn-small" onclick="showCourseContent(7)">View Content</button>
+                    </div>
+
+                    <div class="course-card">
+                        <div class="course-level">Advanced</div>
+                        <h3>Mobile Testing with Appium</h3>
+                        <p>Automate mobile applications</p>
+                        <div class="course-details">
+                            <span>📚 13 lessons</span>
+                            <span>💻 8 exercises</span>
+                        </div>
+                        <button class="btn btn-small" onclick="showCourseContent(8)">View Content</button>
+                    </div>
+                </div>
+
+                <!-- Course Content Modal -->
+                <div id="courseModal" class="modal">
+                    <div class="modal-content">
+                        <span class="close" onclick="closeCourseModal()">&times;</span>
+                        <h2 id="courseTitle"></h2>
+                        <div id="courseBody"></div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Practice Section -->
+            <section id="practice" class="tab-content">
+                <div class="section-header">
+                    <h2>Practice Questions</h2>
+                    <p>Sharpen your skills with different question types</p>
+                </div>
+
+                <div class="practice-filters">
+                    <button class="filter-btn active" onclick="filterQuestions('all')">All Questions</button>
+                    <button class="filter-btn" onclick="filterQuestions('mcq')">MCQ</button>
+                    <button class="filter-btn" onclick="filterQuestions('coding')">Coding</button>
+                    <button class="filter-btn" onclick="filterQuestions('fillblank')">Fill the Blank</button>
+                </div>
+
+                <div id="questionsContainer" class="questions-container">
+                    <!-- Questions will be loaded here -->
+                </div>
+
+                <!-- Answer Modal -->
+                <div id="answerModal" class="modal">
+                    <div class="modal-content answer-modal">
+                        <span class="close" onclick="closeAnswerModal()">&times;</span>
+                        <div id="answerContent"></div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Interview Q&A Section -->
+            <section id="interview" class="tab-content">
+                <div class="section-header">
+                    <h2>Interview Questions & Answers</h2>
+                    <p>Real questions from top companies</p>
+                </div>
+
+                <div class="interview-filters">
+                    <select id="difficultyFilter" onchange="filterInterviewQuestions()">
+                        <option value="all">All Difficulty Levels</option>
+                        <option value="beginner">Beginner</option>
+                        <option value="intermediate">Intermediate</option>
+                        <option value="advanced">Advanced</option>
+                    </select>
+                    <select id="topicFilter" onchange="filterInterviewQuestions()">
+                        <option value="all">All Topics</option>
+                        <option value="java">Java</option>
+                        <option value="selenium">Selenium</option>
+                        <option value="testing">Testing Concepts</option>
+                        <option value="frameworks">Frameworks</option>
+                    </select>
+                </div>
+
+                <div id="interviewContainer" class="interview-container">
+                    <!-- Interview questions will be loaded here -->
+                </div>
+            </section>
+
+            <!-- Tests Section -->
+            <section id="tests" class="tab-content">
+                <div class="section-header">
+                    <h2>Mock Tests & Assessments</h2>
+                    <p>Test your complete knowledge</p>
+                </div>
+
+                <div class="tests-grid">
+                    <div class="test-card">
+                        <h3>Java Basics Test</h3>
+                        <p>10 questions | 15 minutes</p>
+                        <div class="test-info">
+                            <span>⭐ Beginner</span>
+                            <span>Difficulty: Easy</span>
+                        </div>
+                        <button class="btn btn-small" onclick="startTest(1)">Take Test</button>
+                    </div>
+
+                    <div class="test-card">
+                        <h3>Selenium WebDriver Test</h3>
+                        <p>15 questions | 30 minutes</p>
+                        <div class="test-info">
+                            <span>⭐⭐ Intermediate</span>
+                            <span>Difficulty: Medium</span>
+                        </div>
+                        <button class="btn btn-small" onclick="startTest(2)">Take Test</button>
+                    </div>
+
+                    <div class="test-card">
+                        <h3>TestNG & Frameworks</h3>
+                        <p>20 questions | 45 minutes</p>
+                        <div class="test-info">
+                            <span>⭐⭐⭐ Advanced</span>
+                            <span>Difficulty: Hard</span>
+                        </div>
+                        <button class="btn btn-small" onclick="startTest(3)">Take Test</button>
+                    </div>
+
+                    <div class="test-card">
+                        <h3>Full Stack SDET Test</h3>
+                        <p>50 questions | 90 minutes</p>
+                        <div class="test-info">
+                            <span>⭐⭐⭐ Advanced</span>
+                            <span>Difficulty: Expert</span>
+                        </div>
+                        <button class="btn btn-small" onclick="startTest(4)">Take Test</button>
+                    </div>
+                </div>
+
+                <!-- Test Modal -->
+                <div id="testModal" class="modal">
+                    <div class="modal-content test-modal">
+                        <span class="close" onclick="closeTestModal()">&times;</span>
+                        <div id="testContent"></div>
+                    </div>
+                </div>
+            </section>
+        </main>
+
+        <!-- Footer -->
+        <footer class="footer">
+            <div class="container">
+                <p>&copy; 2026 SDET Academy. All rights reserved. | Learn. Practice. Master.</p>
+                <p>Made with ❤️ for aspiring SDETs</p>
+            </div>
+        </footer>
+    </div>
+
+    <script src="app.js"></script>
+</body>
+</html>
